@@ -62,9 +62,28 @@ You can then upgrade to the latest version at any time, from within that source 
 If you would like to make changes and contribute them back to the project, fork the GitHub project, make your changes, and submit a pull request. This process is beyond the scope of this documentation; for more information see [GitHub's documentation][ghhelp].
 
 
+
 ## Getting Started
 
 Describe the basic steps required to utilize this package. Provide additional sections or subsections as needed. If this documentation exceeds an additional section or two, consider writing a GitBook instead.
+
+
+## On the History of Representing Languages
+
+The identification and representation of languages has a long history.
+
+
+### In the Beginning: RFC 1766
+
+In 1995 [**RFC 1766**][rfc1766] was written to define how "to indicate the language used in an information object", and defines the `Content-Language` MIME (also HTTP) header.  It defines the basic structure of a serialized language tag:
+
+1. A _primary_ language tag, e.g. `en`, of between 1 and 8 alphanumeric characters.
+
+2. One or more optional hyphen-separated subtags, with each tag itself between 1 and 8 alphanumeric characters.
+
+Whitespace is not permitted within a tag. Tags are handled case-insensitively and case should not be used to convey meaning. All two-letter codes within the first tag component are interpreted as per [ISO 639][iso639]. The value `i` is reserved, `x` is defined as _for private use_. Other values cannot be used.
+
+The first subtag is usually an [ISO 639][iso639] two-character country code indicating a regional variant (e.g. `en-CA` v. `en-US`) of the overall language, as defined in that ISO standard. This may also be a dialect declaration, such as `en-cockney`. There are other cases, for example languages not listed, such as `i-cherokee`. Lastly, there may be "script variations", e.g. `az-arabic` v. `az-cyrillic`.
 
 
 ## Version History
@@ -125,3 +144,8 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 [latestversion_]: https://pypi.python.org/pypi/bcp47
 
 [cake]: http://img.shields.io/badge/cake-lie-1b87fb.svg?style=flat
+
+
+[rfc1766]: https://tools.ietf.org/html/rfc1766
+
+[iso639]: https://www.iso.org/iso-639-language-codes.html
