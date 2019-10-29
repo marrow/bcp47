@@ -14,14 +14,18 @@ class Tag(str):
 	prefix = ''
 	
 	def __new__(cls, value):
+		value = value.strip()
+		
 		assert cls.valid(value) and cls.minimum <= len(value) <= cls.maximum, \
 				f"A {cls.__name__} must be between {cls.minimum} and {cls.maximum} {ERROR_MAP[cls.valid]} characters."
 		
-		if cls.fold: value = cls.fold(value)
 		return super().__new__(cls, cls._normalize(value))
 	
 	@classmethod
 	def _normalize(cls, value):
+		if cls.fold:
+			value = cls.fold(value)
+		
 		return value
 	
 	def __repr__(self):
@@ -36,7 +40,8 @@ class Language(Tag):
 	def _normalize(cls, value):
 		# When there is both a 2-character code and a 3-charcter code, MUST use the 2-character code.
 		# TODO: Pull this mapping from CLDR.
-		return value
+		return super()._normalize(value)
+		return super()._normalize(value)
 
 
 class SubTag(Tag):
